@@ -1,21 +1,28 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import {Alert, SafeAreaView, StyleSheet, View} from 'react-native';
+import {useDeviceOrientation, useDimensions} from "@react-native-community/hooks";
+import WelcomeScreen from "./app/screen/WelcomeScreen";
+import ViewImageScreen from "./app/screen/ViewImageScreen";
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+    console.log(useDimensions())
+
+    const handlePress = () => console.log('On Press Functions' + new Date())
+    const {landscape} = useDeviceOrientation()
+    console.log('MOI OLEN CONSOLE  ' + landscape)
+    const OpenAlert = () => Alert.alert('Not error', 'MOI', [
+        {text: 'NO', onPress: () => console.log('OLEN NO') },
+        {text: 'YES', onPress: () => console.log('OLEN YES')}
+    ])
+    return (
+        <View style={[styles.container]}>
+            <ViewImageScreen />
+        </View>
+    );
+};
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+    container: {
+        flex: 1,
+    }
 });
